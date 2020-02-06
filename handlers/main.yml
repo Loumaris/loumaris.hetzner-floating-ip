@@ -1,0 +1,6 @@
+---
+# handlers file for loumaris.hetzner-floating-ip
+- name: restart networking
+  service:
+    name: networking
+    state: restarted

@@ -1,0 +1,24 @@
+---
+# tasks file for loumaris.hetzner-floating-ip
+- name: add floating ipv4
+  when: ip_v4 is defined
+  template:
+    src: etc/network/interfaces.d/ipv4.cfg.j2
+    dest: /etc/network/interfaces.d/99-my-floating-ipv4.cfg
+    owner: root
+    group: root
+    mode: 0755
+
+- name: add floating ipv6
+  when: ip_v6 is defined
+  template:
+    src: etc/network/interfaces.d/ipv6.cfg.j2
+    dest: /etc/network/interfaces.d/99-my-floating-ipv6.cfg
+    owner: root
+    group: root
+    mode: 0755
+
+- name: restart networking
+  service:
+    name: networking
+    state: restarted
